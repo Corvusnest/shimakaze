@@ -16,10 +16,10 @@ void update_time(TextLayer *s_time_layer) {
 }
 
 void update_date(TextLayer *s_date_layer) {
-	static char buffer[] = "               ";
+	static char buffer[] = "              ";
 	time_t temp = time(NULL); 
   	struct tm *tick_time = localtime(&temp);
 
-	strftime(buffer, sizeof("               "), "%a     %b  %e", tick_time);
+	strftime(buffer, sizeof("              "), "%a     %b %e", tick_time);
 	text_layer_set_text(s_date_layer, buffer);
 }

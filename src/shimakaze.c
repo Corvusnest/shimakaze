@@ -25,8 +25,12 @@ static void line_update_proc(Layer *this_layer, GContext *ctx) {
   graphics_fill_rect(ctx, GRect(0, 0, 73, 1), 0, GCornerNone);
 }
 
-static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
+static void tick_handler_minute(struct tm *tick_time, TimeUnits units_changed) {
   update_time(s_time_layer);
+}
+
+static void tick_handler_day(struct tm *tick_time, TimeUnits units_changed) {
+  update_date(s_date_layer);
 }
 
 /***************** START *****************/
@@ -79,11 +83,11 @@ static void main_window_load(Window *window) {
   update_time(s_time_layer);
 
   //Date
-  s_date_layer = text_layer_create(GRect(1, 100, 84, 14));
+  s_date_layer = text_layer_create(GRect(1, 95, 84, 14));
   text_layer_set_background_color(s_date_layer, GColorClear);
   text_layer_set_text_color(s_date_layer, GColorWhite);
-  text_layer_set_text(s_date_layer, "               ");
-  text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_GOTHIC_09));
+  text_layer_set_text(s_date_layer, "              ");
+  text_layer_set_font(s_date_layer, fonts_get_system_font(FONT_KEY_GOTHIC_14));
   text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
   update_date(s_date_layer);
@@ -105,7 +109,8 @@ static void init() {
   });
   window_stack_push(s_main_window, true);
   // Register with TickTimerService
-  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+  tick_timer_service_subscribe(MINUTE_UNIT, tick_handler_minute);
+  tick_timer_service_subscribe(DAY_UNIT, tick_handler_day);
 }
 
 static void deinit() {
