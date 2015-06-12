@@ -1,0 +1,40 @@
+{
+  "uuid": "9e0dba8b-d025-4f61-b038-79aad9ee0db1",
+  "shortName": "Shimakaze",
+  "longName": "Shimakaze",
+  "companyName": "CorvusNest",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["basalt"],
+  "watchapp": {
+    "watchface": true
+  },
+  "appKeys": {
+    "dummy": 0
+  },
+  "resources": {
+    "media": [
+      {
+        "menuIcon": true,
+        "type": "png",
+        "name": "IMAGE_MENU_ICON",
+        "file": "image/watchface_icon.png"
+      },
+      {
+        "type": "png",
+        "name": "SHIMAKAZE",
+        "file": "image/shimakaze.png"
+      },
+      {
+        "type": "png",
+        "name": "FLOOR",
+        "file": "image/floor.png"
+      },
+      {
+        "type": "png",
+        "name": "WINDOW_DAY",
+        "file": "image/window_day.png"
+      }
+    ]
+  }
+}
