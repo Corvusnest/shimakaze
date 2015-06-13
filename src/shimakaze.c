@@ -27,9 +27,6 @@ static void line_update_proc(Layer *this_layer, GContext *ctx) {
 
 static void tick_handler_minute(struct tm *tick_time, TimeUnits units_changed) {
   update_time(s_time_layer);
-}
-
-static void tick_handler_day(struct tm *tick_time, TimeUnits units_changed) {
   update_date(s_date_layer);
 }
 
@@ -74,12 +71,9 @@ static void main_window_load(Window *window) {
   text_layer_set_background_color(s_time_layer, GColorClear);
   text_layer_set_text_color(s_time_layer, GColorWhite);
   text_layer_set_text(s_time_layer, "00:00");
-  // Improve the layout to be more like a watchface
   text_layer_set_font(s_time_layer, fonts_get_system_font(FONT_KEY_LECO_28_LIGHT_NUMBERS));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
-  // Add it as a child layer to the Window's root layer
   layer_add_child(window_layer, text_layer_get_layer(s_time_layer));
-  // Make sure the time is displayed from the start
   update_time(s_time_layer);
 
   //Date
@@ -98,6 +92,7 @@ static void main_window_unload(Window *window) {
   bitmap_layer_destroy(s_floor_layer);
   bitmap_layer_destroy(s_window_layer);
   text_layer_destroy(s_time_layer);
+  text_layer_destroy(s_date_layer);
 }
 
 static void init() {
@@ -110,7 +105,6 @@ static void init() {
   window_stack_push(s_main_window, true);
   // Register with TickTimerService
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler_minute);
-  tick_timer_service_subscribe(DAY_UNIT, tick_handler_day);
 }
 
 static void deinit() {
