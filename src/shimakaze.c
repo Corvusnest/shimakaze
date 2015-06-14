@@ -28,6 +28,7 @@ static void line_update_proc(Layer *this_layer, GContext *ctx) {
 static void tick_handler_minute(struct tm *tick_time, TimeUnits units_changed) {
   update_time(s_time_layer);
   update_date(s_date_layer);
+  animate_shimakaze(s_shimakaze_layer);
 }
 
 /***************** START *****************/
@@ -93,6 +94,7 @@ static void main_window_unload(Window *window) {
   bitmap_layer_destroy(s_window_layer);
   text_layer_destroy(s_time_layer);
   text_layer_destroy(s_date_layer);
+  layer_destroy(s_line_layer);
 }
 
 static void init() {
@@ -108,6 +110,7 @@ static void init() {
 }
 
 static void deinit() {
+  animation_unschedule_all();
   window_destroy(s_main_window);
 }
 
