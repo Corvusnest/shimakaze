@@ -28,13 +28,13 @@ void animate_shimakaze(BitmapLayer *bitmap_layer) {
 
 	Layer *layer = bitmap_layer_get_layer(bitmap_layer);
 
-	GRect start = GRect(86, 56, 51, 101);
+	GRect start = GRect(86, 54, 51, 101);
 	GRect finish = GRect(86, 38, 51, 101);
 	PropertyAnimation *prop_anim_move_1 = property_animation_create_layer_frame(layer, &start, &finish);
 	Animation *anim_move_1 = property_animation_get_animation(prop_anim_move_1);
 	animation_set_duration(anim_move_1, 400);
 	animation_set_curve(anim_move_1, AnimationCurveEaseOut);
-	animation_set_delay(anim_move_1, 200);
+	animation_set_delay(anim_move_1, 100);
 
 	start = GRect(86, 38, 51, 101);
 	finish = GRect(86, 56, 51, 101);
